@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Resume Screener 🎨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset */
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f7f9fc;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      background: white;
+      max-width: 520px;
+      width: 100%;
+      padding: 40px 36px 48px;
+      border-radius: 12px;
+      box-shadow:
+        0 8px 20px rgb(0 0 0 / 0.07),
+        0 2px 6px rgb(0 0 0 / 0.04);
+      position: relative;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .container:hover {
+      box-shadow:
+        0 12px 40px rgb(0 0 0 / 0.12),
+        0 4px 12px rgb(0 0 0 / 0.06);
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2.6rem;
+      margin-bottom: 24px;
+      color: #1e293b;
+      letter-spacing: 0.05em;
+      user-select: none;
+      text-align: center;
+      font-feature-settings: "liga";
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #475569;
+      margin-bottom: 6px;
+      user-select: none;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 14px 18px;
+      font-size: 1rem;
+      font-family: 'Roboto Mono', monospace;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      resize: vertical;
+      transition: border-color 0.25s ease;
+      color: #334155;
+      background-color: #f8fafc;
+    }
+
+    textarea::placeholder {
+      color: #94a3b8;
+      font-style: italic;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: #3b82f6;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgb(59 130 246 / 0.3);
+      color: #1e293b;
+    }
+
+    input[type="file"] {
+      font-weight: 500;
+      font-size: 1rem;
+      color: #64748b;
+      cursor: pointer;
+      border-radius: 8px;
+      padding: 6px 12px;
+      border: 1.5px solid #cbd5e1;
+      background-color: #f8fafc;
+      transition: border-color 0.25s ease;
+    }
+    input[type="file"]:hover {
+      border-color: #3b82f6;
+      box-shadow: 0 0 8px rgb(59 130 246 / 0.25);
+    }
+
+    button {
+      padding: 16px 0;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: white;
+      background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      letter-spacing: 0.06em;
+      user-select: none;
+      box-shadow: 0 8px 20px rgb(59 130 246 / 0.5);
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
+      box-shadow: 0 12px 30px rgb(96 165 250 / 0.6);
+    }
+
+    button:active {
+      box-shadow: 0 6px 12px rgb(37 99 235 / 0.7);
+      transform: translateY(1px);
+    }
+
+    .result {
+      margin-top: 40px;
+      background: #f1f5f9;
+      padding: 20px 24px;
+      border-radius: 12px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1rem;
+      max-height: 280px;
+      overflow-y: auto;
+      color: #1e293b;
+      box-shadow:
+        inset 0 0 10px rgb(100 116 139 / 0.15);
+      white-space: pre-wrap;
+      line-height: 1.5;
+      user-select: text;
+      border: 1px solid #cbd5e1;
+    }
+
+    .result::-webkit-scrollbar {
+      width: 8px;
+    }
+    .result::-webkit-scrollbar-thumb {
+      background-color: #93c5fd;
+      border-radius: 10px;
+    }
+
+    /* Signature line */
+    .signature {
+      position: absolute;
+      bottom: 15px;
+      right: 20px;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      font-weight: 500;
+      font-style: italic;
+      user-select: none;
+      letter-spacing: 0.05em;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container {
+        padding: 36px 24px 44px;
+        max-width: 90vw;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      button {
+        font-size: 1.1rem;
+        padding: 14px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container" role="main" aria-label="AI Resume Screener">
+    <h1>📄 AI Resume Screener</h1>
+    <form action="/analyze/" method="post" enctype="multipart/form-data" aria-describedby="form-desc">
+      <label for="job-description">Job Description:</label>
+      <textarea id="job-description" name="job_description" rows="5" placeholder="Paste the job description here..." required></textarea>
+
+      <label for="resume-upload">Upload Resume (PDF):</label>
+      <input id="resume-upload" type="file" name="file" accept=".pdf" required>
+
+      <button type="submit" aria-label="Analyze resume">Analyze Resume</button>
+    </form>
+
+    {% if result %}
+      <section class="result" role="region" aria-live="polite" aria-atomic="true">
+        <h2>📊 AI Feedback:</h2>
+        <pre>{{ result }}</pre>
+      </section>
+    {% endif %}
+
+    <div class="signature">Made by MAYANK SHARMA</div>
+  </main>
+</body>
+</html>

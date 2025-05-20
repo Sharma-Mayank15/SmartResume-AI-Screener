@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f9fa;
+    padding: 40px;
+}
+
+.container {
+    max-width: 720px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+textarea, input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+button {
+    padding: 10px 20px;
+    background: #005eff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 30px;
+    background: #eef;
+    padding: 20px;
+    border-radius: 5px;
+}
