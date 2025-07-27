@@ -1,39 +1,58 @@
 
-# SmartResume-AI-Screener
+# 🚀 SmartResume-AI-Screener
 
-**SmartResume-AI-Screener** is an AI-powered resume screening system that helps recruiters automatically analyze and shortlist candidate resumes using Natural Language Processing (NLP) and Machine Learning techniques.
-
----
-
-## Features
-
-- Extracts key information from resumes (education, skills, experience).
-- Uses AI models to score and rank candidates.
-- Supports multiple resume formats (PDF, DOCX).
-- Easy to deploy and extend.
+**SmartResume-AI-Screener** is an LLM-powered, AI-driven resume screening API built with **FastAPI**, **LangChain**, and **OpenAI**. It enables recruiters and hiring platforms to intelligently parse, evaluate, and rank resumes using dynamic, role-specific screening logic — all served through a scalable, production-ready backend.
 
 ---
 
-## Getting Started
+## 🔍 Overview
 
-### Prerequisites
+This system automates resume screening by:
+- Extracting and analyzing core resume data (skills, experience, education).
+- Using GPT-powered evaluations to score and rank candidates based on a given job description.
+- Offering flexible param-based filtering for UI integrations.
+- Supporting multi-format resume inputs (PDF, DOCX).
 
-- Python 3.10 or above
-- Git
-- [Optional] Virtual environment tool (recommended: `venv` or `conda`)
+Designed for real-world hiring workflows and easy deployment using Docker + CI/CD.
 
 ---
 
-### Installation
+## 🧠 Features
 
-1. **Clone the repository**
+- ✅ **LLM-Powered Scoring** using GPT via LangChain
+- ⚙️ **FastAPI Backend** with modular endpoints
+- 📑 **Multi-format Resume Support** (.pdf, .docx)
+- 🎯 **Dynamic Role Matching** using job descriptions
+- 🔍 **10+ Filter Parameters** for custom screening
+- 🐳 **Dockerized for Production**, CI/CD-ready
+- 🔐 **Environment Secrets** managed via `.env`
+
+---
+
+## 🛠️ Tech Stack
+
+| Category     | Tools Used                          |
+|--------------|-------------------------------------|
+| Language     | Python 3.10+                        |
+| Backend      | FastAPI                             |
+| AI & LLM     | OpenAI GPT-3.5/4, LangChain         |
+| Parsing      | pdfminer, docx2txt, spaCy           |
+| Containerization | Docker, Docker Compose         |
+| Deployment   | Render / Vercel / AWS (Optional)    |
+| Version Control | Git, GitHub                      |
+
+---
+
+## ⚙️ Getting Started
+
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Sharma-Mayank15/SmartResume-AI-Screener.git
 cd SmartResume-AI-Screener
 ```
 
-2. **Create and activate a virtual environment (recommended)**
+### 2. Create a Virtual Environment
 
 ```bash
 python -m venv venv
@@ -43,45 +62,69 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-3. **Install dependencies**
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. **Configure environment variables**
+### 4. Setup Environment Variables
 
-Create a `.env` file in the project root and add your OpenAI API key and any other secrets here:
+Create a `.env` file in the root directory:
 
+```env
+OPENAI_API_KEY=your_openai_key_here
 ```
-OPENAI_API_KEY=your_openai_api_key_here
-```
+
+> ⚠️ Never commit your `.env` file to GitHub!
 
 ---
 
-### Usage
+## ▶️ Running the App
 
-Run the main application to start screening resumes:
+### Local Development (Uvicorn)
 
 ```bash
-python main.py
+uvicorn main:app --reload
 ```
 
-Follow any on-screen prompts to upload resumes or configure screening parameters.
+Visit: [http://localhost:8000/docs](http://localhost:8000/docs) for Swagger UI.
 
 ---
 
-## Important Notes
+## 🐳 Docker Deployment
 
-- **Security:** Never commit `.env` files or secret keys to the repository.
-- **Cache files:** Python cache files (`__pycache__`) are excluded from the repo.
-- **Push protection:** Your repo uses GitHub Push Protection to prevent committing secrets.
+### 1. Build and Run
 
-
-
+```bash
+docker build -t smartresume-api .
+docker run -d -p 8000:8000 smartresume-api
+```
 
 ---
 
-## License
+## 📦 Folder Structure
 
-This project is licensed under the MIT License.
+```bash
+SmartResume-AI-Screener/
+├── app/
+│   ├── main.py
+│   ├── models/
+│   ├── services/
+│   ├── utils/
+│   └── routers/
+├── requirements.txt
+├── Dockerfile
+├── .env.example
+└── README.md
+```
+
+---
+
+## 📜 License
+
+MIT License
+
+---
+
+> Made with ❤️ by [Mayank Sharma](https://github.com/Sharma-Mayank15)
